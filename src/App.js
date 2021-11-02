@@ -29,7 +29,7 @@ function App() {
     }, [foods]);
 
     function addFood(newFood) {
-        alert('Adding new food.');
+        console.log('Adding new food.');
         // Fetch POST to create new food.
         fetch('http://localhost:8080/food', {
             method: 'POST',
@@ -61,12 +61,40 @@ function App() {
             });
     }
 
+    const updateFood = (updatedFood) => {
+        console.log('updating food');
+
+        fetch('http://localhost:8080/food/' + updatedFood.id.toString(), {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedFood),
+        })
+            .then(response => response.json())
+            .then(json => {
+                // Update the state by replacing updatedFood in foods.
+                const foodsUpdated = foods.map((food) => {
+                    if (food.id === json.id) {
+                        return json;
+                    } else {
+                        return food;
+                    }
+                });
+                setFoods([...foodsUpdated]);
+
+                // Load all foods from the server to refresh the data.
+                loadFoods();
+            })
+    };
+
     return (
         <div>
             <h1>Calorie Tracker</h1>
             <CalorieSummary calories={calorieTotal}/>
             <FoodList foods={foods}
                       deleteFood={(foodId) => deleteFood(foodId)}
+                      updateFood={(updatedFood) => updateFood(updatedFood)}
             />
             <AddFoodForm addFood={(newFood) => (addFood(newFood))}/>
         </div>

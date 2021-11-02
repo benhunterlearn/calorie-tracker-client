@@ -8,6 +8,7 @@ export function FoodList(props) {
                 return <Food food={food}
                              deleteFood={props.deleteFood}
                              key={food.id}
+                             updateFood={props.updateFood}
                 />
             })}
         </ul>
