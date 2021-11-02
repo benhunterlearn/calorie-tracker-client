@@ -3,13 +3,23 @@ import {AddFoodForm} from "./AddFoodForm";
 import {FoodList} from "./FoodList";
 import {useEffect, useState} from "react";
 
+function ExerciseList(props) {
+    return <>Exercises you've done today</>;
+}
+
+function AddExerciseForm(props) {
+    return <>Do more exercise</>;
+}
+
 function App() {
     const [foods, setFoods] = useState([]);
+    const [exercises, setExercises] = useState([]);
     const [calorieTotal, setCalorieTotal] = useState(0);
 
     // Load initial data from the server.
     useEffect(() => {
         loadFoods();
+        loadExercises();
     }, []);
 
     const loadFoods = () => {
@@ -18,7 +28,14 @@ function App() {
             .then(json => setFoods(json));
     };
 
-    // Update the calorieTotal when food changes
+    const loadExercises = () => {
+        fetch('http://localhost:8080/exercise')
+            .then(response => response.json())
+            .then(json => setExercises(json))
+            .catch(reason => console.log(reason));
+    };
+
+    // Update the calorieTotal when food or exercises changes
     useEffect(() => {
         let newCalorieTotal = 0;
         foods.forEach((food) => {
@@ -26,7 +43,7 @@ function App() {
         });
         setCalorieTotal(newCalorieTotal);
         console.log('setCalorieTotal: ' + newCalorieTotal.toString());
-    }, [foods]);
+    }, [foods, exercises]);
 
     function addFood(newFood) {
         console.log('Adding new food.');
@@ -88,6 +105,18 @@ function App() {
             })
     };
 
+    const deleteExercise = (exerciseId) => {
+        alert('delete exercise');
+    }
+
+    const updateExercise = (updatedExercise) => {
+        alert('update exercise');
+    }
+
+    const addExercise = (newExercise) => {
+        alert('add exercise');
+    }
+
     return (
         <div>
             <h1>Calorie Tracker</h1>
@@ -97,6 +126,11 @@ function App() {
                       updateFood={(updatedFood) => updateFood(updatedFood)}
             />
             <AddFoodForm addFood={(newFood) => (addFood(newFood))}/>
+            <ExerciseList exercise={exercises}
+                          deleteExercise={(exerciseId) => deleteExercise(exerciseId)}
+                          updateExercise={(updatedExercise) => updateExercise(updatedExercise)}
+            />
+            <AddExerciseForm addExercise={(newExercise) => (addExercise(newExercise))}/>
         </div>
     );
 }

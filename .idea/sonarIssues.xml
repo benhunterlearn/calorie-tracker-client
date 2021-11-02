@@ -38,6 +38,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../calorie-tracker-server/src/main/java/com/swf/calorietrackerserver/Food.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../calorie-tracker-server/src/test/java/com/swf/calorietrackerserver/FoodControllerTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
       </map>
     </option>
   </component>

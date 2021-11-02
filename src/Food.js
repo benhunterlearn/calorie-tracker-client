@@ -19,7 +19,8 @@ export function Food(props) {
         } else {
             return <>
                 <label>
-                    {props.food.name}, {props.food.calories} Calories
+                    {props.food.name}, {props.food.calories} Calories,
+                    <label> {props.food.carbs} Carbohydrates, {props.food.fat} Fat, {props.food.protein} Protein</label>
                 </label>
                 <button onClick={() => setEditing(true)}
                 >Edit

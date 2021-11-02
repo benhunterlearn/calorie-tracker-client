@@ -4,6 +4,9 @@ export function AddFoodForm(props) {
     const emptyFood = {
         name: '',
         calories: '',
+        carbs: '',
+        fat: '',
+        protein: '',
     };
 
     const [newFood, setNewFood] = useState({...emptyFood});
@@ -44,6 +47,21 @@ export function AddFoodForm(props) {
                 ...newFood,
                 calories: event.target.value
             });
+        } else if (event.target.name === 'carbsText') {
+            setNewFood({
+                ...newFood,
+                carbs: event.target.value
+            });
+        } else if (event.target.name === 'fatText') {
+            setNewFood({
+                ...newFood,
+                fat: event.target.value
+            });
+        } else if (event.target.name === 'proteinText') {
+            setNewFood({
+                ...newFood,
+                protein: event.target.value
+            });
         }
     };
 
@@ -63,6 +81,25 @@ export function AddFoodForm(props) {
                    type='text'
                    value={newFood.calories}
             />
+
+            <label>Carbohydrates: </label>
+            <input name='carbsText'
+                   type='text'
+                   value={newFood.carbs}
+            />
+
+            <label>Fat: </label>
+            <input name='fatText'
+                   type='text'
+                   value={newFood.fat}
+            />
+
+            <label>Protein: </label>
+            <input name='proteinText'
+                   type='text'
+                   value={newFood.protein}
+            />
+
             <button>Eat</button>
         </form>
     </div>

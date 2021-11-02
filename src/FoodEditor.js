@@ -1,11 +1,6 @@
 import {useState} from "react";
 
 export function FoodEditor(props) {
-    // const emptyFood = {
-    //     name: '',
-    //     calories: '',
-    // };
-
     const [updatedFood, setUpdatedFood] = useState({...props.food});
 
     const handleOnSubmit = (event) => {
@@ -45,6 +40,21 @@ export function FoodEditor(props) {
                 ...updatedFood,
                 calories: event.target.value
             });
+        } else if (event.target.name === 'carbsText') {
+            setUpdatedFood({
+                ...updatedFood,
+                carbs: event.target.value
+            });
+        } else if (event.target.name === 'fatText') {
+            setUpdatedFood({
+                ...updatedFood,
+                fat: event.target.value
+            });
+        } else if (event.target.name === 'proteinText') {
+            setUpdatedFood({
+                ...updatedFood,
+                protein: event.target.value
+            });
         }
     };
 
@@ -63,6 +73,25 @@ export function FoodEditor(props) {
                    type='text'
                    value={updatedFood.calories}
             />
+
+            <label>Carbohydrates: </label>
+            <input name='carbsText'
+                   type='text'
+                   value={updatedFood.carbs}
+            />
+
+            <label>Fat: </label>
+            <input name='fatText'
+                   type='text'
+                   value={updatedFood.fat}
+            />
+
+            <label>Protein: </label>
+            <input name='proteinText'
+                   type='text'
+                   value={updatedFood.protein}
+            />
+
             <button>Save</button>
         </form>
     </>

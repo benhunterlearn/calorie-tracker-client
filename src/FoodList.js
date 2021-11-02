@@ -2,7 +2,7 @@ import {Food} from "./Food";
 
 export function FoodList(props) {
     return <div>
-        <h2>Food List</h2>
+        <h2>All The Food You've Eaten Today</h2>
         <ul>
             {props.foods.map((food) => {
                 return <Food food={food}
